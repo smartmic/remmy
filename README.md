@@ -8,11 +8,13 @@ remmy.pl - A script to convert reminder type files into iCalendar format
 
 # DESCRIPTION
 
-This single Perl script convert reminders as used by David Skoll's powerful command line program **remind** to the iCalendar format (**.ics**). iCalendar is a widely accepted standard for calendar entries and can be read by popular application like Microsoft's Outlook, Apple's iCal or Google Calendar. *remmy.pl* parses *remind*s input file and tries to adopt many of the sophisticated rules for reminders as implemented in *remind*.
+This single Perl script convert reminders as used by Dianne Skoll's powerful command line program **remind** to the iCalendar format (**.ics**). iCalendar is a widely accepted standard for calendar entries and can be read by popular application like Microsoft's Outlook, Apple's iCal or Google Calendar. *remmy.pl* parses *remind*s input file and tries to adopt many of the sophisticated rules for reminders as implemented in *remind*.
 
 *remmy.pl* solely relies on Perl, an installation of *remind* is not necessary.
 
-While **remmy** is build upon the specification of the RFC2445, full compliance cannot be ensured.
+**Note** that this script is neither a replacement nor an improvement of *remind*, in fact, it handles only a very limited subset of *remind* specification for parsing reminder-type input files.
+
+While *remmy* is build with reference to RFC2445, full compliance cannot be ensured.
 
 # OPTIONS
 
@@ -60,4 +62,4 @@ Mark Atwood has written a similar programm which uses the output of the *remind 
 
 # SEE ALSO
 
-[remind](https://metacpan.org/pod/remind), [rem2ics](https://metacpan.org/pod/rem2ics)
+[remind](https://dianne.skoll.ca/projects/remind/), [rem2ics](https://metacpan.org/pod/rem2ics)
