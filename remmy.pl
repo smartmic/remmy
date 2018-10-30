@@ -10,7 +10,7 @@ remmy.pl < reminderfile > icsfile
 
 =head1 DESCRIPTION
 
-This single Perl script convert reminders as used by David Skoll's powerful command line program B<remind> to the iCalendar format (B<.ics>). iCalendar is a widely accepted standard for calendar entries and can be read by popular application like Microsoft's Outlook, Apple's iCal or Google Calendar. I<remmy.pl> parses I<remind>s input file and tries to adopt many of the sophisticated rules for reminders as implemented in I<remind>.
+This single Perl script convert reminders as used by Dianne Skoll's powerful command line program B<remind> to the iCalendar format (B<.ics>). iCalendar is a widely accepted standard for calendar entries and can be read by popular application like Microsoft's Outlook, Apple's iCal or Google Calendar. I<remmy.pl> parses I<remind>s input file and tries to adopt many of the sophisticated rules for reminders as implemented in I<remind>.
 
 While B<remmy> is build upon the specification of the RFC2445, full compliance cannot be ensured.
 
