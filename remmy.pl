@@ -253,8 +253,6 @@ foreach my $line (@userinput) {
 
         unless ($userinput[$lineno-1] =~ /AT/) {}
         else {
-            $dtstart = $dtstart.sprintf("T%02d%02d%02d",$h,$m,$s);
-            $dtend = $dtend.sprintf("T%02d%02d%02d",$h,$m,$s);
             my @mytime = ($line =~ /AT\s+(\d+):(\d+)\s+?\+?(\d+)?/);
             $h = $mytime[0];
             $m = $mytime[1];
@@ -267,6 +265,8 @@ foreach my $line (@userinput) {
                 . "END:VALARM\n";
 
             }
+            $dtstart = $dtstart.sprintf("T%02d%02d%02d",$h,$m,$s);
+            $dtend = $dtend.sprintf("T%02d%02d%02d",$h,$m,$s);
         }
         
         # --- END Field after AT is scanned for time specifications...
