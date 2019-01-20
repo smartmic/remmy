@@ -1,18 +1,20 @@
-#REM 1 MSG First of every month 
-#REM 31 MSG 31th of every month with 31 days 
-#REM Feb MSG Every day in February 
-#REM 29 Feb MSG Every 29th of February 
-#REM Jan 6 MSG Every 6th of January 
-#REM 2012 MSG Every day in 2012
-#REM 1 2012 MSG 1st of every month in 2012
-#REM 2012 23 MSG 23rd of every month in 2012
-#REM Feb 2013 MSG Every day in February 2013
-#REM Sep 2012 MSG Every day in September 2012
-#REM 2013 Jul 3 MSG 12th of September 2012
-#REM Sat MSG Every Saturday
-#REM Mon Tue Wed MSG Every Monday, Tuesday, Wednesday
-#REM Wed Thu 15 MSG First Thursday after the N-th Day of every Month
-#REM Mon March MSG Every Monday in March
-#REM Mon Wed Fri Jun MSG Every Monday, Wednesday and Friday in June
-#REM Sat Sun 2014 MSG Every Saturday and Sunday in 2014
-REM Mon 15 2013 MSG 1st Monday after 15th of every month in 2013
+REM 1 MSG First of every month 
+REM 31 MSG 31th of every month with 31 days 
+REM Feb MSG Every day in February 
+REM 29 Feb MSG Every 29th of February 
+REM Jan 6 MSG Every 6th of January 
+REM 2019 MSG Every day in 2019
+REM 1 2019 MSG 1st of every month in 2019
+REM 2019 23 MSG 23rd of every month in 2019
+REM Feb 2020 MSG Every day in February 2020
+REM Sep 2019 MSG Every day in September 2019
+REM 2020 Jul 3 MSG 3rd July 2020
+REM Sat MSG Every Saturday
+REM Mon Tue Wed MSG Every Monday, Tuesday, Wednesday
+REM Wed Thu 15 MSG First Wednesday and Thursday after the 15th of every Month
+REM Mon March MSG Every Monday in March
+REM Mon Wed Fri Jun MSG Every Monday, Wednesday and Friday in June
+REM Tue Sun Aug 2018 MSG Every Tuesday, Sunday in August 2018
+REM Sat Sun 2021 MSG Every Saturday and Sunday in 2018
+REM Mon 15 2020 MSG 1st Monday after 15th of every month in 2020
+REM 1 -1 AT 20:00 MSG Last day of every month at 8 pm
