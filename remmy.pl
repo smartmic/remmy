@@ -313,11 +313,11 @@ sub create_start {
 }
 
 sub create_end {
-    print "END:VCALENDAR";
+    print "\nEND:VCALENDAR\n";
 }
 
 sub static_hdr {
-	print "BEGIN:VEVENT\n";
+	print "\nBEGIN:VEVENT\n";
 	
 	#  Organizer entry
 	my $idname =  `id -nu`;
