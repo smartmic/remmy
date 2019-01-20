@@ -98,13 +98,15 @@ foreach my $line (@userinput) {
         #  Field 1 after "REM" will always be parsed for date information...
         my ($y,@mo,$dy,$delta); # month variable can be variable also
         my @rfcdays = qw(SU MO TU WE TH FR SA);
-        my ($sec,$min,$hour,$day,$month,$yr19,@rest) = localtime(time);
+        my ($sec,$min,$hour,$today,$month,$yr19,@rest) = localtime(time);
+        my $day;
         #my $utc_off = (int `date +%z`)/100;
         my @weekdays = qw(Sun Mon Tue Wed Thu Fri Sat);
         my $dint = 0;
         my $addweek;
+        my $backflag = "";
 
-        foreach my $val ($values[1] =~ m/(\d+)/g) {
+        foreach my $val ($values[1] =~ m/ (\d+)/g) {
             if ($val ~~ [1..31]) {	
                 $dy = $val;
                 if ($values[1] =~ m/$val\s\+(\d+)/) {
@@ -115,6 +117,9 @@ foreach my $line (@userinput) {
                     print "ACTION:DISPLAY\n"
                     . "DESCRIPTION:Reminder\n"
                     . "END:VALARM\n";
+                }
+                if ($values[1] =~ m/$val\s-(\d+)/) {
+                    $backflag = "-";
                 }
             }
             if ($val ~~ [1990..2075]) {	
@@ -138,7 +143,6 @@ foreach my $line (@userinput) {
         }
         
         my @wrule_1 = "BYDAY=";
-        my $today = (localtime(time ))[6];
         my ($fdflag,$numwk,$dy_org);	
         my @wkpos;
         foreach my $day (@weekdays) {
@@ -185,10 +189,9 @@ foreach my $line (@userinput) {
             print $dyrule."\n";
         }
 
-         
         
         if (!defined $mo[0] && defined $dy) { 
-            my $morule = "RRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=$dy;";
+            my $morule = "RRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=$backflag$dy;";
             if (defined $addweek) {
                 my @a = split(/BYMONTHDAY/,$morule);
                 $morule = $a[0].join("",@wrule_1);
@@ -219,6 +222,8 @@ foreach my $line (@userinput) {
             print $wkrule."\n";
         }
 
+        unless (defined $dy) {$dy=1;}
+
         unless (defined $y) {
             $y = $yr19+1900;
             if (defined $mo[0] && $mo[0]<$month+1){$y++;}    
@@ -226,8 +231,6 @@ foreach my $line (@userinput) {
                 while (&leapyear ($y) == 365) {$y++;}
             }
         }
-
-        unless (defined $dy) {$dy=1;}
         
         unless (defined $mo[0]) {
             $mo[0] = $month+1;
@@ -290,7 +293,7 @@ foreach my $line (@userinput) {
         # --- END Last field after MSG is scanned for messages
 
         #  Timestamp for entry
-        printf qq{DTSTAMP:%04d%02d%02dT%02d%02d%02d\n}, $yr19+=1900,$month+=1,$day,$hour,$min,$sec;
+        printf qq{DTSTAMP:%04d%02d%02dT%02d%02d%02d\n}, $yr19+=1900,$month+=1,$today,$hour,$min,$sec;
         # --- END Timestamp for entry
 
         print "END:VEVENT\n";
