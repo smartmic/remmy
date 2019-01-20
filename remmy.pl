@@ -142,8 +142,10 @@ foreach my $line (@userinput) {
             }
         }
         
+        #chop(@morule_1);
         my @wrule_1 = "BYDAY=";
-        my ($fdflag,$numwk,$dy_org);	
+        #my $today = (localtime(time ))[6];
+        my ($fdflag,$nyflag,$numwk,$dy_org);	
         my @wkpos;
         foreach my $day (@weekdays) {
             if ($values[1] =~ /$day/i) {
@@ -152,15 +154,18 @@ foreach my $line (@userinput) {
                 
                 my $daydiff = $dint - $today + $addweek;
                 my @nextday =  localtime(time + (86400 * $daydiff));
-                if (!defined $fdflag && !defined $dy && !defined $mo[0] &&
-                !defined $y) {
-                    ($dy,$mo[0],$y) = @nextday[3..5]; 
-                    $y = $y+1900;
+                if (!defined $fdflag && !defined $dy && !defined $mo[0]) {
+                    if (!defined $y) {
+                        $y = $nextday[5];
+                        $y = $y+1900;
+                        $nyflag = 1;
+                    }
+                    ($dy,$mo[0]) = @nextday[3..4]; 
                     $mo[0]++;
+                    $fdflag = 1;
                 }
                 #last;
-                $fdflag = 1;
-                if (defined $dy) {
+                if (defined $dy && !defined $fdflag) {
                     #$numwk = ($dy,4)[$dy > 4];
                     if ($dy <= 7) { $numwk = 1 };
                     if ($dy > 7 and $dy <= 14) { $numwk = 2; }
@@ -174,9 +179,9 @@ foreach my $line (@userinput) {
             $dint++;
         }
 
-        if (!defined $dy && !defined $day) { 
+        if (!defined $dy && !defined $addweek) { 
             my $dyrule = "RRULE:FREQ=DAILY;INTERVAL=1;";
-            if (defined $y) {	
+            if (!defined $nyflag && defined $y) {	
                 my $lastmonth;
                 if (!defined $mo[0]) {$mo[0]=1;$lastmonth=12;} else {$lastmonth = $mo[0];}
                 $dyrule = $dyrule.sprintf("UNTIL=%04d%02d%02d",
@@ -196,10 +201,14 @@ foreach my $line (@userinput) {
                 my @a = split(/BYMONTHDAY/,$morule);
                 $morule = $a[0].join("",@wrule_1);
             }
+            if (!defined $nyflag && defined $y) {
+                chop($morule);
+                $morule = $morule.";UNTIL=$y"."1231;";
+            }
             chop($morule);
             print $morule."\n";
         }
-        elsif (!defined $y && !defined $addweek) { 
+        elsif (defined $dy && !defined $y && !defined $addweek) { 
             my $yrule = "RRULE:FREQ=YEARLY;INTERVAL=1;BYMONTHDAY=$dy;"; 
             $yrule = $yrule.join("",@morule_1);
             chop($yrule);
@@ -207,18 +216,19 @@ foreach my $line (@userinput) {
         }
        
         my $wkrule;
-        if (defined $addweek && !defined $dy) {
+        if (defined $addweek && defined $mo[0]) {
             $wkrule = "RRULE:FREQ=WEEKLY;WKST=SU;";
             $wkrule = $wkrule.join("",@wrule_1);
-            if (defined $mo[0])  {
+            if (defined $mo[0] && !defined $fdflag)  {
                 chop($wkrule);
                 $wkrule = $wkrule.";".join("",@morule_1);
             }
-            if (!defined $mo[0] and defined $y) {
+            if (!defined $nyflag && defined $y) {
                 chop($wkrule);
-                $wkrule = $wkrule.";UNTIL=$y"."1231";
+                $wkrule = $wkrule.";UNTIL=$y"."1231;";
                 $mo[0] = 1;
             }
+            chop($wkrule);
             print $wkrule."\n";
         }
 
