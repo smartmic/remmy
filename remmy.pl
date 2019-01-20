@@ -289,6 +289,7 @@ foreach my $line (@userinput) {
 
         my $content = $values[-1];
         $content =~ s/%.//g;
+        print "SUMMARY:$content";
         print "DESCRIPTION:$content";
         # --- END Last field after MSG is scanned for messages
 
