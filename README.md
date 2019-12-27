@@ -50,7 +50,7 @@ expected. It was not tested with all calender application.
 
 A quick test for the output:
 
-    diff -I UID -I DTSTAMP okreminders.ics <(cat testreminders|./remmy.pl)
+    diff -I ORGANIZER -I UID -I DTSTAMP okreminders.ics <(cat testreminders|./remmy.pl)
 
 Please report bugs to the author or improve the code by yourself and
 share the changes. You are encouraged to test **remmy**s output with
