@@ -1,3 +1,12 @@
+## ⚠️ This project has moved
+
+This repository is now maintained at <https://codeberg.org/smartmic/remmy>
+
+This GitHub mirror may be out of date. Please file issues and
+contributions on Codeberg.
+
+---
+
 # NAME
 
 remmy.pl - A script to convert reminder type files into iCalendar format
